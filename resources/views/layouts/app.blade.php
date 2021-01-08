@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -29,6 +30,13 @@
 
             <!-- Page Content -->
             <main>
+
+                @if(session('message'))
+                    <div class="container mt-5">
+                        <div class="alert alert-success">{{ session('message') }}</div>
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>

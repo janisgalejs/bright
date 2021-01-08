@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::resource('activity', \App\Http\Controllers\Admin\ActivityController::class)
+        ->except('show');
+
+    Route::get('dashboard', [\App\Http\Controllers\HomeController::class, 'dashboard'])
+        ->name('dashboard');
+
+});
 
 require __DIR__.'/auth.php';
